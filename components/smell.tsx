@@ -41,35 +41,11 @@ export default function AddSmellCanvas() {
 
     const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
 
-  
-    function overlayDisplay(overlayLatLng: [number, number]) {
-        if (overlayLatLng === [0,0]){
-            return(<Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[0,0]}></Overlay>);
-        }
-        else{
-            return(
-                <Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[75, 75]}>
-                    <Box
-                        sx={{
-                        width: 150,
-                        height: 150,
-                        backgroundColor: 'gray',
-                        borderRadius: '30%',
-                        }}>
-                            <h3>place a smell?</h3>
-                            <CancelIcon color="primary"/>
-                    </Box>
-                </Overlay>)
-            }
-        }
-
     return (
         <div className={styles.box}>
             <h1 className={styles.header}>Add a Smell!</h1>
             <div className='map'>
-            <Map height="40vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
-               {overlayDisplay(overlayLatLng)}
-               
+            <Map height="40vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19}>               
             </Map>
             </div>
 
