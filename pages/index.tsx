@@ -26,6 +26,18 @@ const Home: NextPage = () => {
       <Link href="smelllistcanvas">
         <a>smelllistcanvas</a> 
       </Link>  
+      <br></br>
+      <br></br>
+      <br></br>
+      <Link href="mapcanvas">
+        <a>mapcanvas</a> 
+      </Link>  
+      <br></br>
+      <br></br>
+      <br></br>
+      <Link href="individualsmellcanvas">
+        <a>individualsmellcanvas</a> 
+      </Link>  
 
             <div className={styles.box}>
               <Box
