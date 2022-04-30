@@ -3,7 +3,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import Popup from '../components/popup'
+import Box from '@mui/material/Box'
+import * as React from 'react';
+import Button from '@mui/material/Button';
 
 
 const Home: NextPage = () => {
@@ -24,7 +26,25 @@ const Home: NextPage = () => {
       <Link href="smelllistcanvas">
         <a>smelllistcanvas</a> 
       </Link>  
-      <Popup />
+
+            <div className={styles.box}>
+              <Box
+                  sx={{
+                  width: "70vw",
+                  height: "70vh",
+                  backgroundColor: 'gray',
+                  borderRadius: '5%',
+                  }}>
+
+                      <div className={styles.button}><Button variant="contained">Button 1</Button></div>
+                      
+                      <div className={styles.button}><Button variant="contained">Button 2</Button></div>
+              
+                      <div className={styles.button}><Button variant="contained">Button 3</Button></div>
+                
+                </Box>
+            </div>
+
     </div>
     
   )
