@@ -1,3 +1,48 @@
-h1{
+.box{
+    display: flex;
+    flex-direction: column;
+    background-color:pink;
+}
+
+.header{
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    text-decoration: double;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.title{
+    display: flex;
+    align-self: center;
+    margin: 20px;
+    width: 1000px;
+}
+
+.category{
+    display: flex;
+    align-self: center;
+    margin: 20px;
+    width: 700px;
+}
+
+.rating{
+    align-self: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.switch{
+    align-self: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.textbox{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin: 20px;
+    width: 800px;
 }

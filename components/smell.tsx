@@ -64,8 +64,8 @@ export default function AddSmellCanvas() {
         }
 
     return (
-        <div>
-            <h1 className='header'>Add a Smell!</h1>
+        <div className={styles.box}>
+            <h1 className={styles.header}>Add a Smell!</h1>
             <div className='map'>
             <Map height="40vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
                {overlayDisplay(overlayLatLng)}
@@ -73,9 +73,9 @@ export default function AddSmellCanvas() {
             </Map>
             </div>
 
-            <TextField id="outlined-basic" label="Title of Smell" variant="outlined" />
+            <TextField className={styles.title} id="outlined-basic" label="Title of Smell" variant="outlined" />
 
-            <div className='category'>
+            <div className={styles.category}>
             <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Smell Category</InputLabel>
             <Select
@@ -92,7 +92,7 @@ export default function AddSmellCanvas() {
             </FormControl>
             </div>
 
-            <div className='rating'>
+            <div className={styles.rating}>
             <Typography component="legend">Smell Rating</Typography>
                 <Rating
                     name="hover-feedback"
@@ -112,13 +112,13 @@ export default function AddSmellCanvas() {
                     )}
             </div>
 
-            <div className='switch'>
+            <div className={styles.switch}>
             <FormGroup>
                 <FormControlLabel control={<Switch defaultChecked />} label="Allergy" />
             </FormGroup>
             </div>
 
-            <div className='text-box'>
+            <div className={styles.textbox}>
             <TextField className='text-box-info'
                 id="outlined-multiline-static"
                 label="Description"
