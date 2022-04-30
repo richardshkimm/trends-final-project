@@ -1,10 +1,9 @@
-import React, { Component, useState } from "react"
+import Smell from '../components/smell';
 
 export default function AddSmellCanvas() {
+   
+    return(   
+           <Smell/>          
+    )
 
-    return (
-        <div>
-            <Component smell></Component>
-        </div>
-    );
-  }
+}

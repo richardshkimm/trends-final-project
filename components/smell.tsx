@@ -75,12 +75,12 @@ export default function AddSmellCanvas() {
 
 
             <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Smell Category</InputLabel>
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={smell}
-                label="Age"
+                label="smell-category"
                 onChange={handleChange}
             >
                 <MenuItem>Good</MenuItem>
