@@ -1,6 +1,3 @@
-.smellheader{
-    display: flex;
-    flex-direction: row;
-    align-self: center;
+h1{
+    text-align: center;
 }
-
