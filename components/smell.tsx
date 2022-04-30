@@ -41,39 +41,17 @@ export default function AddSmellCanvas() {
 
     const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
 
-  
-    function overlayDisplay(overlayLatLng: [number, number]) {
-        if (overlayLatLng === [0,0]){
-            return(<Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[0,0]}></Overlay>);
-        }
-        else{
-            return(
-                <Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[75, 75]}>
-                    <Box
-                        sx={{
-                        width: 150,
-                        height: 150,
-                        backgroundColor: 'gray',
-                        borderRadius: '30%',
-                        }}>
-                            <h3>place a smell?</h3>
-                            <CancelIcon color="primary"/>
-                    </Box>
-                </Overlay>)
-            }
-        }
-
     return (
-        <div>
-            <h1 className={styles.smellheader}>Add a Smell!</h1>
-            <Map height="40vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
-               {overlayDisplay(overlayLatLng)}
-               
+        <div className={styles.box}>
+            <h1 className={styles.header}>Add a Smell!</h1>
+            <div className='map'>
+            <Map height="40vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19}>               
             </Map>
+            </div>
 
-            <TextField id="outlined-basic" label="Title of Smell" variant="outlined" />
+            <TextField className={styles.title} id="outlined-basic" label="Title of Smell" variant="outlined" />
 
-
+            <div className={styles.category}>
             <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Smell Category</InputLabel>
             <Select
@@ -88,8 +66,9 @@ export default function AddSmellCanvas() {
                 <MenuItem>Bad</MenuItem>
             </Select>
             </FormControl>
+            </div>
 
-
+            <div className={styles.rating}>
             <Typography component="legend">Smell Rating</Typography>
                 <Rating
                     name="hover-feedback"
@@ -107,17 +86,27 @@ export default function AddSmellCanvas() {
                     {value !== null && (
                     <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                     )}
-            
+            </div>
+
+            <div className={styles.switch}>
             <FormGroup>
                 <FormControlLabel control={<Switch defaultChecked />} label="Allergy" />
             </FormGroup>
-            <TextField
+            </div>
+
+            <div className={styles.textbox}>
+            <TextField className='text-box-info'
                 id="outlined-multiline-static"
                 label="Description"
                 multiline
                 rows={4}
                 defaultValue=""
             />
+            </div>
+
+            <div className={styles.submit}>
+            <Button variant="contained">Submit</Button>
+            </div>
         </div>
     );
   }
