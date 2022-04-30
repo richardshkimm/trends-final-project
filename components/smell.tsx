@@ -64,16 +64,18 @@ export default function AddSmellCanvas() {
         }
 
     return (
-        <div>
-            <h1 className={styles.smellheader}>Add a Smell!</h1>
+        <div className={styles.box}>
+            <h1 className={styles.header}>Add a Smell!</h1>
+            <div className='map'>
             <Map height="40vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
                {overlayDisplay(overlayLatLng)}
                
             </Map>
+            </div>
 
-            <TextField id="outlined-basic" label="Title of Smell" variant="outlined" />
+            <TextField className={styles.title} id="outlined-basic" label="Title of Smell" variant="outlined" />
 
-
+            <div className={styles.category}>
             <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Smell Category</InputLabel>
             <Select
@@ -88,8 +90,9 @@ export default function AddSmellCanvas() {
                 <MenuItem>Bad</MenuItem>
             </Select>
             </FormControl>
+            </div>
 
-
+            <div className={styles.rating}>
             <Typography component="legend">Smell Rating</Typography>
                 <Rating
                     name="hover-feedback"
@@ -107,17 +110,23 @@ export default function AddSmellCanvas() {
                     {value !== null && (
                     <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                     )}
-            
+            </div>
+
+            <div className={styles.switch}>
             <FormGroup>
                 <FormControlLabel control={<Switch defaultChecked />} label="Allergy" />
             </FormGroup>
-            <TextField
+            </div>
+
+            <div className={styles.textbox}>
+            <TextField className='text-box-info'
                 id="outlined-multiline-static"
                 label="Description"
                 multiline
                 rows={4}
                 defaultValue=""
             />
+            </div>
         </div>
     );
   }
