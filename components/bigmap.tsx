@@ -2,16 +2,18 @@ import React, { useState } from "react"
 import { Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box'
-import styles from '../styles/mapcanvas.module.css'
+import Smell from '../components/smell';
+import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
 
 export default function MapCanvas() {
    
 
     const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
-
+    const [addingSmell, setAddingSmell]= useState<boolean>(false)
+    
   
-    function overlayDisplay(overlayLatLng: [number, number]) {
+    function mobileOverlayDisplay(overlayLatLng: [number, number]) {
         if (overlayLatLng === [0,0]){
             return(<Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[0,0]}>
                 <div></div>
@@ -32,7 +34,7 @@ export default function MapCanvas() {
                             </div>
                             <div className={styles.overlayBox}>
                                 <h6>submit a smell at {overlayLatLng}?</h6>
-                                <Button variant="contained">Add Smell</Button>
+                                <Button variant="contained" onClick={()=> setAddingSmell(true)}>Add Smell</Button>
                             </div>
                             
                     </Box>
@@ -42,12 +44,33 @@ export default function MapCanvas() {
     }
 }
 
+    function overlayHandler(){
+        if (addingSmell === true){
+            return(
+                <div className={styles.box}>
+                    <Box
+                    sx={{
+                    width: "70vw",
+                    height: "70vh",
+                    backgroundColor: 'gray',
+                    borderRadius: '5%',
+                    }}>
+                        <Smell/>
+                    </Box>
+                </div>
+            
+            
+            )}
+        else if (addingSmell === false){
+            return (mobileOverlayDisplay(overlayLatLng))
+        }
+    }
+
 //offset should be half the height and width of the size of the overlay element (both positive)
     return (
         <div>
             <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
-               {overlayDisplay(overlayLatLng)}
-               
+                {overlayHandler()}
             </Map>
         </div>
     );
