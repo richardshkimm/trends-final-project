@@ -127,6 +127,10 @@ export default function AddSmellCanvas() {
                 defaultValue=""
             />
             </div>
+
+            <div className={styles.submit}>
+            <Button variant="contained">Submit</Button>
+            </div>
         </div>
     );
   }

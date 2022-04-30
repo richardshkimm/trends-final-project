@@ -46,3 +46,9 @@
     margin: 20px;
     width: 800px;
 }
+
+.submit{
+    align-self: center;
+    margin: 20px;
+    width: 100px;
+}
