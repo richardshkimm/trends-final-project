@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box'
+import styles from '../styles/mapcanvas.module.css'
+import Button from '@mui/material/Button';
 
 export default function MapCanvas() {
     const [hue, setHue] = useState(0)
@@ -12,22 +14,28 @@ export default function MapCanvas() {
   
     function overlayDisplay(overlayLatLng: [number, number]) {
         if (overlayLatLng === [0,0]){
-            return(<Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[0,0]}></Overlay>);
+            return(<Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[0,0]}>
+                <div></div>
+            </Overlay>);
         }
-        else{
+        else if (overlayLatLng[0] !== 0 && overlayLatLng[1] !== 0){
             return(
                 <Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[75, 75]}>
                     <Box
                         sx={{
                         width: 150,
-                        height: 150,
+                        height: 200,
                         backgroundColor: 'gray',
                         borderRadius: '30%',
                         }}>
-                            <h3>place a smell?</h3>
-                            <CancelIcon color="primary"/>
-                  
-                  
+                            <div className={styles.overlayCancelIcon}>
+                                <CancelIcon style={{color: "red"}} onClick={()=> setOverlayLatLng([0,0])}/>
+                            </div>
+                            <div className={styles.overlayBox}>
+                                <h6>submit a smell at {overlayLatLng}?</h6>
+                                <Button variant="contained">Add Smell</Button>
+                            </div>
+                            
                     </Box>
                     
                     
