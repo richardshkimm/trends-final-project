@@ -1,5 +1,6 @@
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography, FormGroup, FormControlLabel, Switch } from '@mui/material';
 import * as React from 'react';
+import styles from '../styles/addsmellcanvas.module.css'
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
@@ -28,7 +29,7 @@ export default function AddSmellCanvas() {
 
     return (
         <div>
-            <h1>This is the add smell canvas</h1>
+            <h1 className={styles.smellheader}>Add a Smell!</h1>
             <TextField id="outlined-basic" label="Title of Smell" variant="outlined" />
             <TextField id="outlined-basic" label="Smell Category" variant="outlined" />
             <Typography component="legend">Smell Rating</Typography>
@@ -48,6 +49,16 @@ export default function AddSmellCanvas() {
                 {value !== null && (
                 <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                 )}
+            <FormGroup>
+                <FormControlLabel control={<Switch defaultChecked />} label="Allergy" />
+            </FormGroup>
+            <TextField
+                id="outlined-multiline-static"
+                label="Description"
+                multiline
+                rows={4}
+                defaultValue=""
+            />
         </div>
     );
   }
