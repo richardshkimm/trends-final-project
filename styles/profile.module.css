@@ -1,9 +1,27 @@
 .container {
-    text-align: center;
+    text-align: left;
 }
 .avatar {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    vertical-align:middle;
+    display: inline-block
+
+}
+.follow {
+    position: absolute;
+    left: 0%;
+    transform: translateX(-0%);
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    text-transform: capitalize;
+}
+.posts{
+   
+}
+
+.details{
+    text-align: inline-block;
 
 }
