@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography, FormGroup, FormControlLabel, Switch } from '@mui/material';
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
@@ -48,6 +48,9 @@ export default function AddSmellCanvas() {
                 {value !== null && (
                 <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
                 )}
+            <FormGroup>
+                <FormControlLabel control={<Switch defaultChecked />} label="Allergy" />
+            </FormGroup>
         </div>
     );
   }
