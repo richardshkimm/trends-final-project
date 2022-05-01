@@ -1,0 +1,38 @@
+.box{
+  display: flex;
+  flex-direction: column;
+}
+
+.header{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+  text-decoration: double;
+  font-family: Verdana, Tahoma, sans-serif;
+}
+
+.list{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+  text-decoration: double;
+  font-family: Verdana, Tahoma, sans-serif;
+}
+
+.title{
+  display: flex;
+  align-self: center;
+  margin: 20px;
+  width: 1000px;
+}
+
+.category{
+
+}
+
+.rating{
+
+}
+
