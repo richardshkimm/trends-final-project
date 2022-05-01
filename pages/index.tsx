@@ -38,24 +38,16 @@ const Home: NextPage = () => {
       <Link href="individualsmellcanvas">
         <a>individualsmellcanvas</a> 
       </Link>  
-
-            <div className={styles.box}>
-              <Box
-                  sx={{
-                  width: "70vw",
-                  height: "70vh",
-                  backgroundColor: 'gray',
-                  borderRadius: '5%',
-                  }}>
-
-                      <div className={styles.button}><Button variant="contained">Button 1</Button></div>
-                      
-                      <div className={styles.button}><Button variant="contained">Button 2</Button></div>
-              
-                      <div className={styles.button}><Button variant="contained">Button 3</Button></div>
-                
-                </Box>
-            </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div id={styles.shadowbox}>
+        <h1 className={styles.rainbow}> 
+        <p>Application UI is currently being implemented in separate "canvases" to improve modularity and reduce merge conflicts</p>
+          <p>Therefore, elements may be sporadically spread throughout site, with the furthest along page being the "map canvas"</p>
+          They're all linked here on the index.tsx home page though will be migrated here together later as api calls necessitate their usage
+        </h1>
+      </div>
 
     </div>
     

@@ -1,11 +1,12 @@
 .box{
     display: flex;
     flex-direction: column;
-    background-color:pink;
+    background-color: rgba(117, 246, 255, 0.616);
 }
 
 .header{
     text-align: center;
+    color: antiquewhite;
     display: flex;
     flex-direction: column;
     margin: 40px;
