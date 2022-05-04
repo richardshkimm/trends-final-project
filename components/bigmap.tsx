@@ -43,7 +43,7 @@ export default function MapCanvas() {
         if (addingSmell === true){
             return(
             <div>
-                <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}}>
+                <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}}>
                     <div className={styles.box}>
                         <Box
                         sx={{
@@ -66,7 +66,7 @@ export default function MapCanvas() {
         else if (addingSmell === false){
             return (
                 <div>
-                    <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
+                    <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
                         {mobileOverlayDisplay(overlayLatLng)}
                         
                     </Map>
