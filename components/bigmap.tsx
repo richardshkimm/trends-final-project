@@ -10,7 +10,6 @@ export default function MapCanvas() {
 
     const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
     const [addingSmell, setAddingSmell]= useState<boolean>(false)
-    const [disableMouseMap, setDisableMouseMap]= useState<boolean>(false)
     
     function mobileOverlayDisplay(overlayLatLng: [number, number]) {
         if (overlayLatLng === [0,0]){
@@ -41,34 +40,15 @@ export default function MapCanvas() {
 }
 
     function overlayHandler(){
-        if (addingSmell === true && disableMouseMap === false){
+        if (addingSmell === true){
             return(
             <div>
-                <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]]); setDisableMouseMap(true)}}>
+                <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}}>
                     <div className={styles.box}>
                         <Box
                         sx={{
                         width: "70vw",
-                        height: "70vh",
-                        backgroundColor: 'gray',
-                        borderRadius: '5%',
-                        }}>
-                            <Smell/>
-                        </Box>
-                    </div>
-                </Map>
-            </div>
-            )
-                    }
-        else if (addingSmell === true && disableMouseMap === true){
-            return(
-            <div>
-                <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19}>
-                    <div className={styles.box}>
-                        <Box
-                        sx={{
-                        width: "70vw",
-                        height: "70vh",
+                        height: "100vh",
                         backgroundColor: 'gray',
                         borderRadius: '10%',
                         }}>
@@ -78,7 +58,8 @@ export default function MapCanvas() {
                 </Map>
             </div>
             )
-                    }
+        }
+
         else if (addingSmell === false){
             return (
                 <div>
