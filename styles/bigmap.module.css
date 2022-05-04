@@ -17,10 +17,17 @@
     padding-left: 70%;
 }
 
+.smellCancelIcon{
+    display: flex;
+    padding-left: 80%;
+    margin-bottom: -5%;
+}
+
 .box {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 5%;
     z-index: 10;
     filter: drop-shadow(0 0 1rem rgb(0, 0, 0));
   }

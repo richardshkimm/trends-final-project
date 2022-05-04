@@ -52,6 +52,9 @@ export default function MapCanvas() {
                         backgroundColor: 'gray',
                         borderRadius: '10%',
                         }}>
+                            <div className={styles.smellCancelIcon}>
+                                <CancelIcon style={{color: "red"}} onClick={()=> {setAddingSmell(false); setOverlayLatLng([0,0])}}/>
+                            </div>
                             <Smell/>
                         </Box>
                     </div>
@@ -65,6 +68,7 @@ export default function MapCanvas() {
                 <div>
                     <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
                         {mobileOverlayDisplay(overlayLatLng)}
+                        
                     </Map>
                 </div>
             )
