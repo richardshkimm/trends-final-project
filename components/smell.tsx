@@ -37,7 +37,7 @@ export default function AddSmellCanvas() {
     };
 
     return (
-        <div className={styles.box}>
+        <div>
             <h1 className={styles.header}>Add a Smell!</h1>
             <div className='map'>
                 <Map height="30vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 

@@ -48,7 +48,7 @@ export default function MapCanvas() {
                         <Box
                         sx={{
                         width: "70vw",
-                        height: "100vh",
+                        height: "70vh",
                         backgroundColor: 'gray',
                         borderRadius: '10%',
                         }}>
