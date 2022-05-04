@@ -37,9 +37,19 @@ export default function AddSmellCanvas() {
     };
 
     return (
-        <div>
-            <h1 className={styles.header}>Add a Smell!</h1>
-            <div className='map'>
+        <div className={styles.box}>
+            <Box
+                        sx={{
+                        width: "70vw",
+                        height: "70vh",
+                        backgroundColor: 'gray',
+                        borderRadius: '10%',
+                        }}>
+                            
+                        
+            
+                            <h1 className={styles.header}>Add a Smell!</h1>
+            <div>
                 <Map height="30vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 
                     <Marker anchor={[42.444, -76.48]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
                 </Map>
@@ -103,6 +113,8 @@ export default function AddSmellCanvas() {
             <div className={styles.submit}>
             <Button variant="contained">Submit</Button>
             </div>
+            </Box>
+
         </div>
     );
   }
