@@ -1,6 +1,7 @@
 import React from "react";
 import { Map } from "pigeon-maps";
 import styles from '../styles/addSmellList.module.css';
+import Link from 'next/link';
 
 export default function AddSmellList() {
 
@@ -15,7 +16,9 @@ export default function AddSmellList() {
             </div>
             
             <div className={styles.list}>
-              <p> 1. {smell1} || {smellRating} </p>
+            <Link href="eachSmell">
+            <a> 1. {smell1} || {smellRating} </a>
+            </Link>  {/* Make this into a pop up and also add onHover effect */}
               <p> 2. "Title of Smell" || </p>
               <p> 3. "Title of Smell" || </p>
               <p> 4. "Title of Smell" || </p>
