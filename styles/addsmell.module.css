@@ -1,14 +1,14 @@
 .box{
     display: flex;
     flex-direction: column;
-    background-color: rgba(117, 246, 255, 0.616);
     height: 70vh;
     width: 70vw;
     border-radius: 10%;
     filter: drop-shadow(0 0 1rem rgb(0, 0, 0));
-    z-index: 6
+    z-index: 6;
+    padding-left: 15%;
+    padding-top: 15%;
 }
-
 
 .header{
     text-align: center;
