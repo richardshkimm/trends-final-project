@@ -70,7 +70,7 @@ export default function MapCanvas() {
                         width: "70vw",
                         height: "70vh",
                         backgroundColor: 'gray',
-                        borderRadius: '5%',
+                        borderRadius: '10%',
                         }}>
                             <Smell/>
                         </Box>

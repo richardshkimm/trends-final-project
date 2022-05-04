@@ -1,6 +1,6 @@
 import { Button, TextField, Typography, FormGroup, FormControlLabel, Switch } from '@mui/material';
 import React, { useState } from "react"
-import styles from '../styles/addsmellcanvas.module.css'
+import styles from '../styles/addsmell.module.css'
 import {Rating, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from '@mui/material';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
@@ -36,17 +36,13 @@ export default function AddSmellCanvas() {
         setSmell(event.target.value as string);
     };
 
-    const [hue, setHue] = useState(0)
-    const color = `hsl(${hue % 360}deg 39% 70%)`
-
-    const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
-
     return (
         <div className={styles.box}>
             <h1 className={styles.header}>Add a Smell!</h1>
             <div className='map'>
-            <Map height="40vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19}>               
-            </Map>
+                <Map height="30vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} maxZoom={19} mouseEvents={false} touchEvents={false}> 
+                    <Marker anchor={[42.444, -76.48]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
+                </Map>
             </div>
 
             <TextField className={styles.title} id="outlined-basic" label="Title of Smell" variant="outlined" />

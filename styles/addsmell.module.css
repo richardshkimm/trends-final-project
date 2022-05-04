@@ -9,7 +9,7 @@
     color: antiquewhite;
     display: flex;
     flex-direction: column;
-    margin: 40px;
+    margin: 3%;
     text-decoration: double;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -17,39 +17,39 @@
 .title{
     display: flex;
     align-self: center;
-    margin: 20px;
-    width: 1000px;
+    margin: 3%;
+    width: 70%;
 }
 
 .category{
     display: flex;
     align-self: center;
-    margin: 20px;
-    width: 700px;
+    margin: 2%;
+    width: 70%;
 }
 
 .rating{
     align-self: center;
     justify-content: center;
-    margin: 20px;
+    margin: 2%;
 }
 
 .switch{
     align-self: center;
     justify-content: center;
-    margin: 20px;
+    margin: 2%;
 }
 
 .textbox{
     display: flex;
     flex-direction: column;
     align-self: center;
-    margin: 20px;
-    width: 800px;
+    margin: 2%;
+    width: 80%;
 }
 
 .submit{
     align-self: center;
-    margin: 20px;
+    margin: 2%;
     width: 100px;
 }
