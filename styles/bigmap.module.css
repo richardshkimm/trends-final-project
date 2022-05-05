@@ -15,5 +15,7 @@
     display: flex;
     padding-left: 80%;
     z-index: 10;
+    margin-bottom: -1.5rem;
+    margin-top: 15%;
 }
 

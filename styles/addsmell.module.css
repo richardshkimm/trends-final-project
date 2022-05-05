@@ -3,11 +3,12 @@
     flex-direction: column;
     height: 70vh;
     width: 70vw;
-    border-radius: 10%;
+    border-radius: 8%;
     filter: drop-shadow(0 0 1rem rgb(0, 0, 0));
     z-index: 6;
-    padding-left: 15%;
-    padding-top: 15%;
+    justify-content: center;
+    
+    
 }
 
 .header{
