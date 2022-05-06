@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect} from "react"
 import { Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box'
@@ -7,6 +7,34 @@ import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
 
 export default function MapCanvas() {
+
+    const [stat, setStat] = useState<String>("");
+    const [userLat, setUserLat] = useState<number>(42.444);
+    const [userLong, setUserLong] = useState<number>(-76.48);  
+    
+    const [mapCenter, setMapCenter] = useState([42.444, -76.48])
+
+    const getLocation = () => {
+        if (!navigator.geolocation){
+            setStat("Retrieving your Location is not supported by your broswer")
+        }
+        const success = (pos : GeolocationPosition) => {
+            setStat("");
+            setUserLong(pos.coords.longitude);
+            setUserLat(pos.coords.latitude);
+            setMapCenter([pos.coords.latitude, pos.coords.longitude]);
+        }
+
+        const error = (error: GeolocationPositionError) => {
+            setStat("Location unretrievable")
+        }
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+
+    useEffect(() => {
+        // This will fire only on mount.
+        getLocation();
+      }, [])
 
     const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
     const [addingSmell, setAddingSmell]= useState<boolean>(false)
@@ -43,8 +71,9 @@ export default function MapCanvas() {
         if (addingSmell === true){
             return(
             <div>
-                <Map height="99.6vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}}>
-                    
+                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}}>
+                        <h1>{userLat},{userLong}</h1>
+                        
                         <div className={styles.smellCancelIcon}>
                                 <CancelIcon style={{color: "red"}} onClick={()=> {setAddingSmell(false); setOverlayLatLng([0,0])}}/>
                         </div>
@@ -58,8 +87,12 @@ export default function MapCanvas() {
         else if (addingSmell === false){
             return (
                 <div>
-                    <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
-                        {mobileOverlayDisplay(overlayLatLng)}
+                    <Map height="99.7vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
+                    <h1>{userLat},{userLong}</h1>
+                    <Overlay anchor={[userLat, userLong]} offset={[25, 25]}>
+                    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Location_dot_blue.svg/1024px-Location_dot_blue.svg.png' width={50} height={50} alt='location indicator' />
+                </Overlay>
+                    {mobileOverlayDisplay(overlayLatLng)}
                         
                     </Map>
                 </div>

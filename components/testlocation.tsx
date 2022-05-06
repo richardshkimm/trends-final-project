@@ -1,9 +1,4 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Map, Marker, Overlay } from "pigeon-maps"
-import CancelIcon from '@mui/icons-material/Cancel';
-import Box from '@mui/material/Box'
-import Smell from '../components/smell';
-import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
 
 export default function MapCanvas() {
