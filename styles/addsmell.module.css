@@ -1,13 +1,17 @@
 .box{
-    display: flex;
+    /* display: flex;  */
     flex-direction: column;
-    height: 40vh;
-    width: 100vw;
+    /* height: 40vh;  */
+    width: 70vw; 
+    top: 50%;
+    left: 50%;
+    position: fixed; 
+    transform: translate(-50%, -50%);
     border-radius: 8%;
     filter: drop-shadow(0 0 1rem rgb(0, 0, 0));
     z-index: 6;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
 }
 
 .header{
