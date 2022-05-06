@@ -19,7 +19,7 @@ export default function AddSmellCanvas() {
     0.5: 'Death',
     1: 'Grotesque',
     1.5: 'Gross',
-    2: 'Smelly',
+    2: 'Stinky',
     2.5: 'Tolerable',
     3: 'Decent',
     3.5: 'Nice',
