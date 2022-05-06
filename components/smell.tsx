@@ -41,9 +41,9 @@ export default function AddSmellCanvas() {
         <div className={styles.box}>
             <Box
                         sx={{
-                        border: 2,
-                        maxWidth: "110vw",
-                        maxHeight: "100vh",
+                        border: 1,
+                        maxWidth: "150vw",
+                        maxHeight: "110vh",
                         backgroundColor: 'lightblue',
                         borderRadius: '8%',
                         }}>
@@ -57,10 +57,15 @@ export default function AddSmellCanvas() {
                     </Map>
                 </div>
 
-                <TextField className={styles.title} id="outlined-basic" label="Title of Smell" variant="outlined" />
+                <TextField 
+                className={styles.title} 
+                id="outlined-basic" 
+                label="Title of Smell" 
+                variant="outlined"
+                />
 
                 <div className={styles.rating}>
-                <Typography component="legend">Smell Rating</Typography>
+                <Typography component="legend"></Typography>
                     <Rating
                         name="hover-feedback"
                         value={value}

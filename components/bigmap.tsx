@@ -8,7 +8,6 @@ import Button from '@mui/material/Button';
 
 export default function MapCanvas() {
 
-
     const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
     const [addingSmell, setAddingSmell]= useState<boolean>(false)
     
@@ -59,7 +58,7 @@ export default function MapCanvas() {
         else if (addingSmell === false){
             return (
                 <div>
-                    <Map height="99.6vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]]); console.log(event, latLng, pixel)}}>
+                    <Map height="99.7vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
                         {mobileOverlayDisplay(overlayLatLng)}
                         
                     </Map>

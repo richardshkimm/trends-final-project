@@ -1,6 +1,6 @@
 .box{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 40vh;
     width: 100vw;
     border-radius: 8%;
@@ -22,9 +22,10 @@
 
 .title{
     display: flex;
+    flex-direction: column;
     align-self: center;
+    justify-content: center;
     margin: 3%;
-    width: 70%;
 }
 
 .category{
@@ -35,12 +36,16 @@
 }
 
 .rating{
+    display: flex;
+    flex-direction: row;
     align-self: center;
     justify-content: center;
     margin: 2%;
 }
 
 .switch{
+    display: flex;
+    flex-direction: row;
     align-self: center;
     justify-content: center;
     margin: 2%;
@@ -50,10 +55,13 @@
     display: flex;
     flex-direction: column;
     align-self: center;
+    justify-content: center;
     margin: 2%;
 }
 
 .submit{
+    display: flex;
+    flex-direction: row;
     align-self: center;
     justify-content: center;
     margin: 2%;
