@@ -1,14 +1,13 @@
 .box{
     display: flex;
-    flex-direction: column;
-    height: 70vh;
-    width: 70vw;
+    flex-direction: row;
+    height: 40vh;
+    width: 100vw;
     border-radius: 8%;
     filter: drop-shadow(0 0 1rem rgb(0, 0, 0));
     z-index: 6;
+    align-items: center;
     justify-content: center;
-    
-    
 }
 
 .header{
@@ -52,11 +51,10 @@
     flex-direction: column;
     align-self: center;
     margin: 2%;
-    width: 80%;
 }
 
 .submit{
     align-self: center;
+    justify-content: center;
     margin: 2%;
-    width: 100px;
 }

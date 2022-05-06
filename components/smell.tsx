@@ -4,6 +4,7 @@ import styles from '../styles/addsmell.module.css'
 import {Rating, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from '@mui/material';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
+import { borders } from '@mui/system';
 import { Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -40,8 +41,9 @@ export default function AddSmellCanvas() {
         <div className={styles.box}>
             <Box
                         sx={{
-                        width: "70vw",
-                        height: "70vh",
+                        border: 2,
+                        maxWidth: "110vw",
+                        maxHeight: "100vh",
                         backgroundColor: 'lightblue',
                         borderRadius: '8%',
                         }}>
