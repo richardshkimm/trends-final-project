@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box'
@@ -27,6 +27,22 @@ export default function MapCanvas() {
         }
         navigator.geolocation.getCurrentPosition(success, error);
     }
+
+    useEffect(() => {
+        // This will fire only on mount.
+        getLocation();
+        
+      }, [])
+
+    const MINUTE_MS = 5000;
+
+    useEffect(() => {
+    const interval = setInterval(() => {
+        console.log('Logs every minute');
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+    }, [])
 
 
 //offset should be half the height and width of the size of the overlay element (both positive)
