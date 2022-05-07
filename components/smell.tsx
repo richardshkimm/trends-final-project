@@ -41,8 +41,8 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
 
     const [smell, setSmell] = React.useState('');
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setSmell(event.target.value as string);
+    const handleChange = (val: string) => {
+        setSmell(val);
     };
 
     return (
@@ -62,12 +62,13 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
             
                 <h1 className={styles.header}>Add a Smell!</h1>
                 <div className={styles.map}>
-                    <Map height="30vh" defaultCenter={[overlayLatLng[0], overlayLatLng[1]]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 
+                    <Map height = "30vh" defaultCenter={[overlayLatLng[0], overlayLatLng[1]]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 
                         <Marker width={60} anchor={[overlayLatLng[0], overlayLatLng[1]]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
                     </Map>
                 </div>
 
-                <TextField 
+                <TextField
+                onChange={event => {handleChange(event.target.value)}}
                 className={styles.title} 
                 id="outlined-basic" 
                 label="Title of Smell" 
