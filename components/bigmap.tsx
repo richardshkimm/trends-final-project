@@ -92,7 +92,7 @@ export default function MapCanvas() {
                         <h1>{userLat},{userLong}</h1>
                         
                         
-                        <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell} overlayLatLng={overlayLatLng}/>
+                        <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell}/>
                     
                 </Map>
             </div>

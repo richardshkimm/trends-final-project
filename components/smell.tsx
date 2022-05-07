@@ -17,7 +17,7 @@ type Props = {
     readonly overlayLatLng: [number, number];
   };
 
-export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSmell, overlayLatLng }: Props) {
+export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSmell }: Props) {
 
     function getLabelText(value: number) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
@@ -56,7 +56,7 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
 
     function firebaseData(){
         if (submit == true){
-            let firebaseData =  {smell, value, allergy, description,}
+            let firebaseData =  {smell, value, allergy, description, lat, lng}
         }
     }
 
@@ -77,8 +77,8 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
             
                 <h1 className={styles.header}>Add a Smell!</h1>
                 <div className={styles.map}>
-                    <Map height = "30vh" defaultCenter={[overlayLatLng[0], overlayLatLng[1]]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 
-                        <Marker width={60} anchor={[overlayLatLng[0], overlayLatLng[1]]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
+                    <Map height = "30vh" defaultCenter={[lat, lng]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 
+                        <Marker width={60} anchor={[lat, lng]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
                     </Map>
                 </div>
 
