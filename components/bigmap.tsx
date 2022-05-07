@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 
 export default function MapCanvas() {
 
-    const [stat, setStat] = useState<String>("");
+    const [locationStat, setLocationStat] = useState<String>("Uninitialized");
     const [userLat, setUserLat] = useState<number>(42.444);
     const [userLong, setUserLong] = useState<number>(-76.48);  
     
@@ -16,17 +16,17 @@ export default function MapCanvas() {
 
     const getLocation = () => {
         if (!navigator.geolocation){
-            setStat("Retrieving your Location is not supported by your broswer")
+            setLocationStat("Retrieving your Location is not supported by your broswer")
         }
         const success = (pos : GeolocationPosition) => {
-            setStat("");
+            setLocationStat("");
             setUserLong(pos.coords.longitude);
             setUserLat(pos.coords.latitude);
             setMapCenter([pos.coords.latitude, pos.coords.longitude]);
         }
 
         const error = (error: GeolocationPositionError) => {
-            setStat("Location unretrievable")
+            setLocationStat("Location unretrievable")
         }
         navigator.geolocation.getCurrentPosition(success, error);
     }
@@ -40,6 +40,23 @@ export default function MapCanvas() {
     const [addingSmell, setAddingSmell]= useState<boolean>(false)
     
     function mobileOverlayDisplay(overlayLatLng: [number, number]) {
+        if (locationStat !== "" && overlayLatLng[0] !== 0 && overlayLatLng[1] !== 0){
+            return (
+                <Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[45, 90]}>
+                    <Box
+                        sx={{
+                        width: 90,
+                        height: 110,
+                        backgroundColor: 'gray',
+                        borderRadius: '30%',
+                        }}>
+                            <div className={styles.overlayBox}>
+                                <h5>Please enable location to make a submission</h5>
+                            </div>  
+                    </Box>
+                </Overlay>
+            )
+        }
         if (overlayLatLng === [0,0]){
             return(<Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[0,0]}>
                 <div></div>
@@ -47,7 +64,7 @@ export default function MapCanvas() {
         }
         else if (overlayLatLng[0] !== 0 && overlayLatLng[1] !== 0){
             return(
-                <Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[75, 75]}>
+                <Overlay anchor={[overlayLatLng[0], overlayLatLng[1]]} offset={[75, 100]}>
                     <Box
                         sx={{
                         width: 150,
@@ -59,7 +76,7 @@ export default function MapCanvas() {
                                 <CancelIcon style={{color: "red"}} onClick={()=> setOverlayLatLng([0,0])}/>
                             </div>
                             <div className={styles.overlayBox}>
-                                <h6>submit a smell at {overlayLatLng}?</h6>
+                                <h5>Submit a smell at {overlayLatLng}?</h5>
                                 <Button variant="contained" onClick={()=> setAddingSmell(true)}>Add Smell</Button>
                             </div>  
                     </Box>
