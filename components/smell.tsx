@@ -73,7 +73,9 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
                             
                 <div className={styles.smellCancelIcon}>
                     <CancelIcon style={{color: "red"}} onClick={()=> {setAddingSmell(false); setOverlayLatLng([0,0])}}/>
-                </div>        
+                </div>    
+                
+                    
             
                 <h1 className={styles.header}>Add a Smell!</h1>
                 <div className={styles.map}>

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box'
 import Smell from '../components/smell';
 import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
 
 export default function MapCanvas() {
 
@@ -77,6 +78,7 @@ export default function MapCanvas() {
                             </div>
                             <div className={styles.overlayBox}>
                                 <h5>Submit a smell at {overlayLatLng}?</h5>
+                                
                                 <Button variant="contained" onClick={()=> setAddingSmell(true)}>Add Smell</Button>
                             </div>  
                     </Box>
@@ -88,7 +90,7 @@ export default function MapCanvas() {
         if (addingSmell === true){
             return(
             <div>
-                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15}>
+                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false}>
                         <h1>{userLat},{userLong}</h1>
                         
                         
@@ -108,7 +110,6 @@ export default function MapCanvas() {
                     <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Location_dot_blue.svg/1024px-Location_dot_blue.svg.png' width={50} height={50} alt='location indicator' />
                 </Overlay>
                     {mobileOverlayDisplay(overlayLatLng)}
-                        
                     </Map>
                 </div>
             )
@@ -118,6 +119,7 @@ export default function MapCanvas() {
 //offset should be half the height and width of the size of the overlay element (both positive)
     return (
         <div>
+            
             {overlayHandler()}
         </div>
     );
