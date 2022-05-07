@@ -6,6 +6,7 @@ import Smell from '../components/smell';
 import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
+import { style } from "@mui/system";
 
 export default function MapCanvas() {
 
@@ -88,25 +89,24 @@ export default function MapCanvas() {
 
     function overlayHandler(){
         if (addingSmell === true){
+            
             return(
             <div>
-                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false}>
-                        <h1>{userLat},{userLong}</h1>
-                        
-                        
+                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false}>        
                         <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell}/>
-                    
-                </Map>
+                </Map> 
             </div>
             )
         }
 
         else if (addingSmell === false){
+            console.log(userLat, userLong)
             return (
                 <div>
                     <Map height="99.7vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
-                    <h1>{userLat},{userLong}</h1>
-                    <Overlay anchor={[userLat, userLong]} offset={[25, 25]}>
+                    <h1 id={styles.aromap}>aroMap</h1>
+                    
+                    <Overlay anchor={[userLat, userLong]} offset={[25, 105]}>
                     <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Location_dot_blue.svg/1024px-Location_dot_blue.svg.png' width={50} height={50} alt='location indicator' />
                 </Overlay>
                     {mobileOverlayDisplay(overlayLatLng)}
