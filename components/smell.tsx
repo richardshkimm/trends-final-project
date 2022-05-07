@@ -36,14 +36,29 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
     5: 'Heavenly',
     };
 
-    const [value, setValue] = React.useState<number | null>(2);
-    const [hover, setHover] = React.useState(-1);
 
-    const [smell, setSmell] = React.useState('');
+    const [hover, setHover] = useState(-1);
+
+    const [smell, setSmell] = useState('');
+    const [description, setDescription] = useState('');
+    const [value, setValue] = useState<number | null>(2);
+    const [allergy, setAllergy]= useState<boolean>(false)
+    const [submit, setSubmit]= useState<boolean>(false)
+
 
     const handleChange = (val: string) => {
         setSmell(val);
     };
+
+    const handleChangeDesc = (val: string) => {
+        setDescription(val);
+    };
+
+    function firebaseData(){
+        if (submit == true){
+            let firebaseData =  {smell, value, allergy, description,}
+        }
+    }
 
     return (
         <div className={styles.box}>
@@ -97,7 +112,7 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
 
                 <div className={styles.switch}>
                 <FormGroup>
-                    <FormControlLabel control={<Switch defaultChecked />} label="Allergy" />
+                    <FormControlLabel onClick={()=> setAllergy(true)} control={<Switch defaultChecked />} label="Allergy" />
                 </FormGroup>
                 </div>
 
@@ -108,11 +123,13 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
                     multiline
                     rows={4}
                     defaultValue=""
+                    onChange={event => {event.preventDefault(); handleChangeDesc(event.target.value)}}
                 />
                 </div>
 
                 <div className={styles.submit}>
-                <Button variant="contained">Submit</Button>
+                <Button variant="contained" onClick={()=> setSubmit(true)}>Submit</Button>
+                {firebaseData()}
                 </div>
             </Box>
 
