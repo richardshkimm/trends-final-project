@@ -24,6 +24,20 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.smellCancelIcon{
+    display: flex;
+    position: fixed;
+    /* padding-left: 90%; */
+    margin: 3%;
+    top: 1%;
+    /* transform: translate(-50%, -50%); */
+    left: 85%;
+    z-index: 10;
+    /* margin-bottom: -1.5rem;
+    margin-top: 15%; */
+}
+
+
 .title{
     
     margin: 3%;

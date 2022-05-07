@@ -9,7 +9,15 @@ import { Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
 
 
-export default function AddSmellCanvas() {
+type Props = {
+    readonly lat: number;
+    readonly lng: number;
+    readonly setOverlayLatLng: (overlayLatLng: [number, number]) => void;
+    readonly setAddingSmell: (addingSmell: boolean) => void;
+    readonly overlayLatLng: [number, number];
+  };
+
+export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSmell, overlayLatLng }: Props) {
 
     function getLabelText(value: number) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
@@ -48,12 +56,14 @@ export default function AddSmellCanvas() {
                         borderRadius: '8%',
                         }}>
                             
-                        
+                <div className={styles.smellCancelIcon}>
+                    <CancelIcon style={{color: "red"}} onClick={()=> {setAddingSmell(false); setOverlayLatLng([0,0])}}/>
+                </div>        
             
                 <h1 className={styles.header}>Add a Smell!</h1>
                 <div className={styles.map}>
-                    <Map height="30vh" defaultCenter={[42.444, -76.48]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 
-                        <Marker anchor={[42.444, -76.48]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
+                    <Map height="30vh" defaultCenter={[overlayLatLng[0], overlayLatLng[1]]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 
+                        <Marker width={60} anchor={[overlayLatLng[0], overlayLatLng[1]]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
                     </Map>
                 </div>
 

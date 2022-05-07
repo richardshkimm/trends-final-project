@@ -71,13 +71,11 @@ export default function MapCanvas() {
         if (addingSmell === true){
             return(
             <div>
-                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}}>
+                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15}>
                         <h1>{userLat},{userLong}</h1>
                         
-                        <div className={styles.smellCancelIcon}>
-                                <CancelIcon style={{color: "red"}} onClick={()=> {setAddingSmell(false); setOverlayLatLng([0,0])}}/>
-                        </div>
-                        <Smell/>
+                        
+                        <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell} overlayLatLng={overlayLatLng}/>
                     
                 </Map>
             </div>
