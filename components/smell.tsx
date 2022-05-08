@@ -10,7 +10,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { updateDoc ,addDoc, doc, collection } from "firebase/firestore"
 import { db } from "../util/firebase";
 
-
 type Props = {
     readonly lat: number;
     readonly lng: number;
@@ -24,6 +23,7 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
     function getLabelText(value: number) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
       }
+
 
     const labels: { [index: string]: string } = {
     0.5: 'Death',
@@ -66,27 +66,28 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
         setAllergy(false);
     }
 
-
-
-    const d = new Date();
     const sendSmell = async () => {
             await addDoc(smellCollectionRef, { allergy: {allergy}, desc: {description}, location: [{lat}, {lng}], rating: {value}, 
-                time_upload: 0, title: {smellTitle}, 
+                time_upload: Date.now(), title: {smellTitle}, 
                 upvote: {time_upvote: 0, user: {username: "user_1"}}  });
             clearInputs();
             setAddingSmell(false);
-                //time_upload: d.getTime()
+        
             // firebaseData.sm = smell;
             // let firebaseData : Smell =  {sm: smell, rate: value, isAllergic: allergy, desc: description, position: [lat, lng]}
             // let firebaseData = {smell, value, allergy, description, position}
         }
 
-    
 
-    // const docRef = doc(db, "users", "jason");
-    // const updateSmellRef = collection(db, 'smells', {smell.name}); // fill in with the smell you're upvoting/selecting
-    // const exDocRef = doc(db, 'smells', 'ex_smell');
-    // await updateDoc(updateSmellRef, "smell_upvoted" , {upvote: {time_upvote: }});  
+    const submitHandler = () => {
+        if (smellTitle === '' || description === '' || value === null) {
+            alert('Please fill in all smell fields');
+            return;
+        }else if (smellTitle !== '' && description !== '' && value !== null){
+            sendSmell();
+        }
+    }
+    
 
     return (
         <div className={styles.box}>
@@ -158,7 +159,7 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
                 </div>
 
                 <div className={styles.submit}>
-                <Button variant="contained" onClick={() => sendSmell()}>Submit</Button>
+                <Button variant="contained" onClick={() => submitHandler()}>Submit</Button>
                 {/* {acceptData()} */}
                 </div>
             </Box>
