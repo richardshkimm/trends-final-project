@@ -2,11 +2,13 @@ import React from "react";
 import { Map } from "pigeon-maps";
 import styles from '../styles/addSmellList.module.css';
 import Link from 'next/link';
+import { updateDoc ,addDoc, doc, collection } from "firebase/firestore"
+import { db } from "../util/firebase";
 
 export default function AddSmellList() {
 
 
-  const [smell1, smellRating] = ["some smell", "this should be a rating"]
+
   return (
     <div className={styles.box}>
             <h1 className={styles.header}>Smells Near You</h1>
@@ -17,7 +19,7 @@ export default function AddSmellList() {
             
             <div className={styles.list}>
             <Link href="eachSmell">
-            <a> 1. {smell1} || {smellRating} </a>
+            <a> 1. {"smell"} || {"smellRating"} </a>
             </Link>  {/* Make this into a pop up and also add onHover effect */}
               <p> 2. "Title of Smell" || </p>
               <p> 3. "Title of Smell" || </p>

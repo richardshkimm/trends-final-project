@@ -13,6 +13,8 @@ export default function MapCanvas() {
     const [locationStat, setLocationStat] = useState<String>("Uninitialized");
     const [userLat, setUserLat] = useState<number>(42.444);
     const [userLong, setUserLong] = useState<number>(-76.48);  
+    const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
+    const [addingSmell, setAddingSmell]= useState<boolean>(false)
     
     const [mapCenter, setMapCenter] = useState([42.444, -76.48])
 
@@ -38,8 +40,7 @@ export default function MapCanvas() {
         getLocation();
       }, [])
 
-    const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
-    const [addingSmell, setAddingSmell]= useState<boolean>(false)
+    
     
     function mobileOverlayDisplay(overlayLatLng: [number, number]) {
         if (locationStat !== "" && overlayLatLng[0] !== 0 && overlayLatLng[1] !== 0){
@@ -100,7 +101,6 @@ export default function MapCanvas() {
         }
 
         else if (addingSmell === false){
-            console.log(userLat, userLong)
             return (
                 <div>
                     <Map height="99.7vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>

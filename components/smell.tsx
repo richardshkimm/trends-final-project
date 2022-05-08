@@ -7,6 +7,8 @@ import StarIcon from '@mui/icons-material/Star';
 import { borders } from '@mui/system';
 import { Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
+import { updateDoc ,addDoc, doc, collection } from "firebase/firestore"
+import { db } from "../util/firebase";
 
 
 type Props = {
@@ -14,11 +16,11 @@ type Props = {
     readonly lng: number;
     readonly setOverlayLatLng: (overlayLatLng: [number, number]) => void;
     readonly setAddingSmell: (addingSmell: boolean) => void;
-    readonly overlayLatLng: [number, number];
   };
 
 export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSmell }: Props) {
 
+    
     function getLabelText(value: number) {
         return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
       }
@@ -38,27 +40,53 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
 
 
     const [hover, setHover] = useState(-1);
-
-    const [smell, setSmell] = useState('');
+    const [smellTitle, setSmellTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [value, setValue] = useState<number | null>(2);
-    const [allergy, setAllergy]= useState<boolean>(false)
-    const [submit, setSubmit]= useState<boolean>(false)
+    const [value, setValue] = useState<number | null>(2.5);
+    const [allergy, setAllergy]= useState<boolean>(false);
+    const smellCollectionRef = collection(db, 'smells');
 
 
     const handleChange = (val: string) => {
-        setSmell(val);
+        setSmellTitle(val);
     };
 
     const handleChangeDesc = (val: string) => {
         setDescription(val);
     };
 
-    function firebaseData(){
-        if (submit == true){
-            let firebaseData =  {smell, value, allergy, description, lat, lng}
-        }
+
+    // type Smell = {sm: string, rate: number | null, desc: string,isAllergic: boolean, position: [number, number] }
+    // var firebaseData = new Object(Smell);
+
+    const clearInputs = () => {
+        setSmellTitle('');
+        setDescription('');
+        setValue(2.5);
+        setAllergy(false);
     }
+
+
+
+    const d = new Date();
+    const sendSmell = async () => {
+            await addDoc(smellCollectionRef, { allergy: {allergy}, desc: {description}, location: [{lat}, {lng}], rating: {value}, 
+                time_upload: 0, title: {smellTitle}, 
+                upvote: {time_upvote: 0, user: {username: "user_1"}}  });
+            clearInputs();
+            setAddingSmell(false);
+                //time_upload: d.getTime()
+            // firebaseData.sm = smell;
+            // let firebaseData : Smell =  {sm: smell, rate: value, isAllergic: allergy, desc: description, position: [lat, lng]}
+            // let firebaseData = {smell, value, allergy, description, position}
+        }
+
+    
+
+    // const docRef = doc(db, "users", "jason");
+    // const updateSmellRef = collection(db, 'smells', {smell.name}); // fill in with the smell you're upvoting/selecting
+    // const exDocRef = doc(db, 'smells', 'ex_smell');
+    // await updateDoc(updateSmellRef, "smell_upvoted" , {upvote: {time_upvote: }});  
 
     return (
         <div className={styles.box}>
@@ -130,8 +158,8 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
                 </div>
 
                 <div className={styles.submit}>
-                <Button variant="contained" onClick={()=> setSubmit(true)}>Submit</Button>
-                {firebaseData()}
+                <Button variant="contained" onClick={() => sendSmell()}>Submit</Button>
+                {/* {acceptData()} */}
                 </div>
             </Box>
 
