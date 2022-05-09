@@ -10,6 +10,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { updateDoc ,addDoc, doc, collection } from "firebase/firestore"
 import { db } from "../util/firebase";
 
+
 type Props = {
     readonly lat: number;
     readonly lng: number;
@@ -87,7 +88,7 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
             sendSmell();
         }
     }
-    
+
 
     return (
         <div className={styles.box}>
@@ -105,7 +106,6 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
                 </div>    
                 
                     
-            
                 <h1 className={styles.header}>Add a Smell!</h1>
                 <div className={styles.map}>
                     <Map height = "30vh" defaultCenter={[lat, lng]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false} touchEvents={false}> 

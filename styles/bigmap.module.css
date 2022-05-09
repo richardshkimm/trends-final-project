@@ -2,6 +2,7 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     color: white;
 }
@@ -23,5 +24,11 @@
     font-style: italic;
 }
 
-
+.fade-in {
+    transition: opacity 1s ease;
+}
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
 

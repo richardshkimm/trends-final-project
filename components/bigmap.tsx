@@ -5,8 +5,6 @@ import Box from '@mui/material/Box'
 import Smell from '../components/smell';
 import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
-import { TextField } from '@mui/material';
-import { style } from "@mui/system";
 
 export default function MapCanvas() {
 
@@ -35,13 +33,20 @@ export default function MapCanvas() {
         navigator.geolocation.getCurrentPosition(success, error);
     }
 
+
     useEffect(() => {
         // This will fire only on mount.
         getLocation();
       }, [])
 
+
+    useEffect(() => { // updates location every ~5 seconds -- check with console.log(userLat, userLong, Date.now());
+        const updateLocation = (setInterval(() => {
+            getLocation();
+            }, 5000));
+            return () => clearInterval(updateLocation);}, [])
     
-    
+
     function mobileOverlayDisplay(overlayLatLng: [number, number]) {
         if (locationStat !== "" && overlayLatLng[0] !== 0 && overlayLatLng[1] !== 0){
             return (
@@ -88,6 +93,7 @@ export default function MapCanvas() {
     }
 }
 
+
     function overlayHandler(){
         if (addingSmell === true){
             
@@ -103,7 +109,7 @@ export default function MapCanvas() {
         else if (addingSmell === false){
             return (
                 <div>
-                    <Map height="99.7vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
+                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
                     <h1 id={styles.aromap}>aroMap</h1>
                     
                     <Overlay anchor={[userLat, userLong]} offset={[25, 105]}>
