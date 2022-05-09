@@ -99,7 +99,7 @@ export default function MapCanvas() {
             
             return(
             <div>
-                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} mouseEvents={false}>        
+                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} mouseEvents={false}>        
                         <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell}/>
                 </Map> 
             </div>
@@ -109,7 +109,7 @@ export default function MapCanvas() {
         else if (addingSmell === false){
             return (
                 <div>
-                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={15} minZoom={15} maxZoom={15} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
+                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
                     <h1 id={styles.aromap}>aroMap</h1>
                     
                     <Overlay anchor={[userLat, userLong]} offset={[25, 105]}>
