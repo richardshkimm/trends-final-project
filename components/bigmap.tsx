@@ -110,11 +110,15 @@ export default function MapCanvas() {
             return (
                 <div>
                     <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
-                    <h1 id={styles.aromap}>aroMap</h1>
                     
-                    <Overlay anchor={[userLat, userLong]} offset={[25, 105]}>
-                    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Location_dot_blue.svg/1024px-Location_dot_blue.svg.png' width={50} height={50} alt='location indicator' />
-                </Overlay>
+                            <h1 id={styles.aromap}>aroMap</h1>
+                        
+                        <Overlay anchor={[userLat, userLong]} offset={[25, 105]}>
+                            <div className={styles.location_container}>
+                                <div className={styles.ring}></div>
+                                <div className={styles.circle}></div>
+                            </div>
+                        </Overlay>
                     {mobileOverlayDisplay(overlayLatLng)}
                     </Map>
                 </div>
