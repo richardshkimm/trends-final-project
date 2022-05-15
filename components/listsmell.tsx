@@ -2,12 +2,20 @@ import React from "react";
 import { Map } from "pigeon-maps";
 import styles from '../styles/addSmellList.module.css';
 import Link from 'next/link';
-import { updateDoc ,addDoc, doc, collection } from "firebase/firestore"
+import { getDocs, updateDoc ,addDoc, doc, collection, query } from "firebase/firestore"
 import { db } from "../util/firebase";
 
 export default function AddSmellList() {
 
-
+  // https://github.com/cornell-dti/trends-sp22-starters/blob/main/lec7-soln/components/roster/Roster.tsx 
+shot) => {
+  //   const rosterData = snapshot.docs.map(
+  //     (doc) => ({ ...doc.data(), id: doc.id } as Smell)
+  //   )
+  //   setRoster(rosterData)
+  // })
+}
+}
 
   return (
     <div className={styles.box}>

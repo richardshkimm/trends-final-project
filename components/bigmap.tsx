@@ -5,6 +5,8 @@ import Box from '@mui/material/Box'
 import Smell from '../components/smell';
 import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
+import { collection, getDocs, updateDoc ,addDoc, doc, query } from "@firebase/firestore";
+import { db } from "../util/firebase";
 
 export default function MapCanvas() {
 
@@ -15,6 +17,28 @@ export default function MapCanvas() {
     const [addingSmell, setAddingSmell]= useState<boolean>(false)
     
     const [mapCenter, setMapCenter] = useState([42.444, -76.48])
+
+    const [allLocations, setAllLocations] = useState<Array<[number, number]>>([])
+
+    const fetchLocations = () => {
+        const smellCollectionRef = collection(db, 'smells');
+        const smellQuery = query(smellCollectionRef)
+        getDocs(smellQuery).then((snapshot) => {
+        const smellData = snapshot.docs.map(
+        (doc) => ({ ...doc.data() })
+        )
+        
+        
+        const smellLocations = smellData.map(smell => smell.location)
+        setAllLocations(smellLocations);
+        
+        })
+    }
+
+    useEffect(() => {
+        // This will fire only on mount. 
+        fetchLocations();
+        }, [])
 
     const getLocation = () => {
         if (!navigator.geolocation){
@@ -33,11 +57,14 @@ export default function MapCanvas() {
         navigator.geolocation.getCurrentPosition(success, error);
     }
 
-
     useEffect(() => {
-        // This will fire only on mount.
+        // This will fire only on mount. 
         getLocation();
       }, [])
+
+      
+
+
 
 
     useEffect(() => { // updates location every ~5 seconds -- check with console.log(userLat, userLong, Date.now());
@@ -109,11 +136,11 @@ export default function MapCanvas() {
         else if (addingSmell === false){
             return (
                 <div>
-                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} onClick={({event, latLng, pixel}) => setOverlayLatLng([latLng[0],latLng[1]])}>
+                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{console.log(bounds.ne),console.log(bounds.sw),fetchLocations()}}} >
                     
                             <h1 id={styles.aromap}>aroMap</h1>
                         
-                        <Overlay anchor={[userLat, userLong]} offset={[25, 105]}>
+                        <Overlay anchor={[userLat, userLong]} offset={[12, 100]}>
                             <div className={styles.location_container}>
                                 <div className={styles.ring}></div>
                                 <div className={styles.circle}></div>
