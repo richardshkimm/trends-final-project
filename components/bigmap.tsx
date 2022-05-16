@@ -50,7 +50,6 @@ export default function MapCanvas() {
     }
 
     const [viewedMarker, setViewedMarker] = useState<[number, number]>([0,0])
-    
 
     function getMarkerInfo() {
         let markerTitle = ""
