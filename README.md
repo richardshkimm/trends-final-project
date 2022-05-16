@@ -22,7 +22,7 @@ Our web application lets you track and report smells around your area! Smell som
 3. Click in the area where you wish to report a smell
 4. Fill out the information about the smell you wish to report
 5. Submit!
-
+6. Click a smell on the map that other users reported to see its info
 
 ## Authors
 

@@ -30,6 +30,9 @@ export default function MapCanvas() {
 
     const [allLocations, setAllLocations] = useState<Array<[number, number]>>([])
 
+    const [dbSmellData, setDbSmellData] = useState<{[x: string]: any; }[]>([]);
+   
+
     const fetchLocations = () => {
         const smellCollectionRef = collection(db, 'smells');
         const smellQuery = query(smellCollectionRef)
@@ -37,18 +40,52 @@ export default function MapCanvas() {
         const smellData = snapshot.docs.map(
         (doc) => ({ ...doc.data() })
         )
+        setDbSmellData(smellData)
         const smellLocations = smellData.map(smell => smell.location)
         const newSmellLocations = []
         smellLocations.forEach(location => newSmellLocations.push([location[0].lat, location[1].lng]))
         setAllLocations(newSmellLocations);
-        console.log(smellData)
+        
         })
     }
 
+    const [viewedMarker, setViewedMarker] = useState<[number, number]>([0,0])
     
 
-    function locationThing(){
-        return(allLocations.map(location => <Marker key={location.toString()} anchor={location} payload={1} />))
+    function getMarkerInfo() {
+        let markerTitle = ""
+        let markerDescription = ""
+        let markerRating = 2.5;
+        let markerAllergy = false;
+
+        for (const smell of dbSmellData) {
+            if (smell.location[0].lat === viewedMarker[0] && smell.location[1].lng === viewedMarker[1]) {
+                markerTitle= smell.title.smellTitle
+                markerDescription = smell.desc.description
+                markerRating = smell.rating.value
+                markerAllergy = smell.allergy.allergy
+            }
+        }
+
+        return (
+            <Overlay anchor={[viewedMarker[0],viewedMarker[1]]} offset={[75, 100]}>
+            <Box
+                sx={{
+                width: 150,
+                height: 200,
+                backgroundColor: 'gray',
+                borderRadius: '30%',
+                }}>
+                <div className={styles.overlayBox}>
+                    <h6>You clicked smell at {viewedMarker} title: {markerTitle} description: {markerDescription} rating : {markerRating} allergy : {markerAllergy}</h6>
+                </div>      
+            </Box>
+        </Overlay>
+        )
+    }
+
+    function displayAllMarkers(){
+        return(allLocations.map(location => <Marker key={location.toString()} anchor={location} payload={1} onClick={() => setViewedMarker(location)}/>))
     }
 
     useEffect(() => {
@@ -149,7 +186,8 @@ export default function MapCanvas() {
                 <div>
         
                     <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={16} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{setMapBounds([bounds.sw,bounds.ne])}}} >
-                    {locationThing()}
+                    {displayAllMarkers()}
+                    {getMarkerInfo()}
                             <h1 id={styles.aromap}>aroMap</h1>
                             
                         <Overlay anchor={[userLat, userLong]} offset={[12, 100]}>
