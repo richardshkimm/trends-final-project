@@ -172,9 +172,9 @@ export default function MapCanvas() {
         if (addingSmell === true){
             
             return(
-            <div>
+                <div style = {{height:"99.6vh"}}>
                 
-                <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} mouseEvents={false}>        
+                <Map center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} mouseEvents={false}>        
                         <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell} fetchLocations={fetchLocations}/>
                 </Map> 
             </div>
@@ -183,9 +183,9 @@ export default function MapCanvas() {
 
         else if (addingSmell === false){
             return (
-                <div>
+                <div style = {{height:"99.6vh"}}>
         
-                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={16} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{setMapBounds([bounds.sw,bounds.ne])}}} >
+                    <Map center={[userLat,userLong]} defaultZoom={18} minZoom={16} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{setMapBounds([bounds.sw,bounds.ne])}}} >
                     {displayAllMarkers()}
                     {getMarkerInfo()}
                             <h1 id={styles.aromap}>aroMap</h1>
