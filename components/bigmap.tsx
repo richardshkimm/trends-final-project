@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react"
-import { Map, Marker, Overlay } from "pigeon-maps"
+import { Point, Map, Marker, Overlay } from "pigeon-maps"
 import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box'
 import Smell from '../components/smell';
@@ -7,6 +7,7 @@ import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
 import { collection, getDocs, updateDoc ,addDoc, doc, query } from "@firebase/firestore";
 import { db } from "../util/firebase";
+import Cluster from 'pigeon-cluster';
 
 export default function MapCanvas() {
 
@@ -15,6 +16,7 @@ export default function MapCanvas() {
     const [userLong, setUserLong] = useState<number>(-76.48);  
     const [overlayLatLng, setOverlayLatLng]= useState<[number, number]>([0,0])
     const [addingSmell, setAddingSmell]= useState<boolean>(false)
+    const [mapBounds, setMapBounds] = useState<Array<[number, number]>>([[0,0],[0,0]])
     
     const [mapCenter, setMapCenter] = useState([42.444, -76.48])
 
@@ -27,22 +29,25 @@ export default function MapCanvas() {
         const smellData = snapshot.docs.map(
         (doc) => ({ ...doc.data() })
         )
-        
-        
         const smellLocations = smellData.map(smell => smell.location)
         setAllLocations(smellLocations);
         
         })
     }
 
+    function locationThing(){
+        console.log(allLocations.map(location => <Marker key={location.toString()} anchor={location} payload={1}/>))
+    }
+
     useEffect(() => {
         // This will fire only on mount. 
         fetchLocations();
+        locationThing();
         }, [])
 
     const getLocation = () => {
         if (!navigator.geolocation){
-            setLocationStat("Retrieving your Location is not supported by your broswer")
+            setLocationStat("Retrieving your Location is not supported by your browser")
         }
         const success = (pos : GeolocationPosition) => {
             setLocationStat("");
@@ -61,18 +66,13 @@ export default function MapCanvas() {
         // This will fire only on mount. 
         getLocation();
       }, [])
-
       
-
-
-
 
     useEffect(() => { // updates location every ~5 seconds -- check with console.log(userLat, userLong, Date.now());
         const updateLocation = (setInterval(() => {
             getLocation();
             }, 5000));
             return () => clearInterval(updateLocation);}, [])
-    
 
     function mobileOverlayDisplay(overlayLatLng: [number, number]) {
         if (locationStat !== "" && overlayLatLng[0] !== 0 && overlayLatLng[1] !== 0){
@@ -120,7 +120,6 @@ export default function MapCanvas() {
     }
 }
 
-
     function overlayHandler(){
         if (addingSmell === true){
             
@@ -136,8 +135,9 @@ export default function MapCanvas() {
         else if (addingSmell === false){
             return (
                 <div>
-                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{console.log(bounds.ne),console.log(bounds.sw),fetchLocations()}}} >
-                    
+        
+                    <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={16} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{setMapBounds([bounds.sw,bounds.ne])}}} >
+                        
                             <h1 id={styles.aromap}>aroMap</h1>
                         
                         <Overlay anchor={[userLat, userLong]} offset={[12, 100]}>
