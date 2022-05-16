@@ -28,10 +28,10 @@ Our web application lets you track and report smells around your area! Smell som
 
 Contributors names and contact info
 
-Benjamin Shapiro 
-Richard Kim
-Arunabh Sarkar
-Sanjana Kasetti
+* Benjamin Shapiro 
+* Richard Kim
+* Arunabh Sarkar
+* Sanjana Kasetti
 
 
 ## License
