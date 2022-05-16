@@ -24,6 +24,8 @@ Our web application lets you track and report smells around your area! Smell som
 5. Submit!
 6. Click a smell on the map that other users reported to see its info
 
+Stale smells should be cleared after a predefined period (via deletion) but this functionality is still WIP
+
 ## Authors
 
 Contributors names and contact info
