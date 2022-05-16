@@ -38,13 +38,17 @@ export default function MapCanvas() {
         (doc) => ({ ...doc.data() })
         )
         const smellLocations = smellData.map(smell => smell.location)
-        setAllLocations(smellLocations);
-        
+        const newSmellLocations = []
+        smellLocations.forEach(location => newSmellLocations.push([location[0].lat, location[1].lng]))
+        setAllLocations(newSmellLocations);
+        console.log(smellData)
         })
     }
 
+    
+
     function locationThing(){
-        return(allLocations.map(location => <Marker key={location.toString()} anchor={location} payload={1}/>))
+        return(allLocations.map(location => <Marker key={location.toString()} anchor={location} payload={1} />))
     }
 
     useEffect(() => {
@@ -132,8 +136,9 @@ export default function MapCanvas() {
             
             return(
             <div>
+                
                 <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={18} maxZoom={18} mouseEvents={false}>        
-                        <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell}/>
+                        <Smell lat={overlayLatLng[0]} lng={overlayLatLng[1]} setOverlayLatLng={setOverlayLatLng} setAddingSmell={setAddingSmell} fetchLocations={fetchLocations}/>
                 </Map> 
             </div>
             )
@@ -144,15 +149,16 @@ export default function MapCanvas() {
                 <div>
         
                     <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={16} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{setMapBounds([bounds.sw,bounds.ne])}}} >
-                            {locationThing()}
+                    {locationThing()}
                             <h1 id={styles.aromap}>aroMap</h1>
-                        
+                            
                         <Overlay anchor={[userLat, userLong]} offset={[12, 100]}>
                             <div className={styles.location_container}>
                                 <div className={styles.ring}></div>
                                 <div className={styles.circle}></div>
                             </div>
                         </Overlay>
+                        
                     {mobileOverlayDisplay(overlayLatLng)}
                     </Map>
                 </div>

@@ -16,9 +16,10 @@ type Props = {
     readonly lng: number;
     readonly setOverlayLatLng: (overlayLatLng: [number, number]) => void;
     readonly setAddingSmell: (addingSmell: boolean) => void;
+    readonly fetchLocations: () => void;
   };
 
-export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSmell }: Props) {
+export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSmell, fetchLocations }: Props) {
 
     
     function getLabelText(value: number) {
@@ -86,6 +87,7 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
             return;
         }else if (smellTitle !== '' && description !== '' && value !== null){
             sendSmell();
+            fetchLocations();
         }
     }
 
@@ -163,7 +165,6 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
                 {/* {acceptData()} */}
                 </div>
             </Box>
-
         </div>
     );
   }
