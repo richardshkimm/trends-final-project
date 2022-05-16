@@ -2,12 +2,13 @@
 import { initializeApp, getApps, getApp, FirebaseError} from "firebase/app"
 import { getFirestore } from "firebase/firestore"
 import {
-  ​​  query,
-  ​​  getDocs,
-  ​​  collection,
-  ​​  where,
-  ​​  addDoc,
-  ​​} from "firebase/firestore";
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+}
+from "firebase/firestore";
 import withFirebaseAuth from "react-with-firebase-auth"
 import "firebase/auth";
 
