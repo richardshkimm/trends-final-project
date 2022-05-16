@@ -109,8 +109,8 @@ export default function AddSmellCanvas({ lat, lng, setOverlayLatLng, setAddingSm
                 
                     
                 <h1 className={styles.header}>Add a Smell!</h1>
-                <div className={styles.map}>
-                    <Map height = "30vh" defaultCenter={[lat, lng]} defaultZoom={18} minZoom={18} maxZoom={18} mouseEvents={false} touchEvents={false}> 
+                <div style={{height:"30vh"}}>
+                    <Map defaultCenter={[lat, lng]} defaultZoom={18} minZoom={18} maxZoom={18} mouseEvents={false} touchEvents={false}> 
                         <Marker width={60} anchor={[lat, lng]} payload={1} onClick={({ event, anchor, payload }) => console.log(anchor, payload)} />
                     </Map>
                 </div>

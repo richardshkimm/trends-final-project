@@ -7,16 +7,6 @@ import { db } from "../util/firebase";
 
 export default function AddSmellList() {
 
-  // https://github.com/cornell-dti/trends-sp22-starters/blob/main/lec7-soln/components/roster/Roster.tsx 
-shot) => {
-  //   const rosterData = snapshot.docs.map(
-  //     (doc) => ({ ...doc.data(), id: doc.id } as Smell)
-  //   )
-  //   setRoster(rosterData)
-  // })
-}
-}
-
   return (
     <div className={styles.box}>
             <h1 className={styles.header}>Smells Near You</h1>
