@@ -4,7 +4,6 @@ const Home = () => {
   return (
     <div>
       <BigMap></BigMap>
-      <div><a href = "/private"> Go to Private </a></div>
     </div>
   )
 }

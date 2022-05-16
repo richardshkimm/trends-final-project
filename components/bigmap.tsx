@@ -6,10 +6,18 @@ import Smell from '../components/smell';
 import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
 import { collection, getDocs, updateDoc ,addDoc, doc, query } from "@firebase/firestore";
-import { db } from "../util/firebase";
-import Cluster from 'pigeon-cluster';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import {useAuthState} from "react-firebase-hooks/auth";
+import {firebaseConfig, db, app} from '../util/firebase';
 
 export default function MapCanvas() {
+
+    firebase.initializeApp(firebaseConfig);
+
+    const auth = firebase.auth()
+    const [user] = useAuthState(auth as any)
 
     const [locationStat, setLocationStat] = useState<String>("Uninitialized");
     const [userLat, setUserLat] = useState<number>(42.444);
@@ -36,13 +44,12 @@ export default function MapCanvas() {
     }
 
     function locationThing(){
-        console.log(allLocations.map(location => <Marker key={location.toString()} anchor={location} payload={1}/>))
+        return(allLocations.map(location => <Marker key={location.toString()} anchor={location} payload={1}/>))
     }
 
     useEffect(() => {
         // This will fire only on mount. 
         fetchLocations();
-        locationThing();
         }, [])
 
     const getLocation = () => {
@@ -137,7 +144,7 @@ export default function MapCanvas() {
                 <div>
         
                     <Map height="99.6vh" center={[userLat,userLong]} defaultZoom={18} minZoom={16} maxZoom={18} onClick={({event, latLng, pixel}) => {setOverlayLatLng([latLng[0],latLng[1]])}} onBoundsChanged={({ bounds }) => {{setMapBounds([bounds.sw,bounds.ne])}}} >
-                        
+                            {locationThing()}
                             <h1 id={styles.aromap}>aroMap</h1>
                         
                         <Overlay anchor={[userLat, userLong]} offset={[12, 100]}>
@@ -153,11 +160,30 @@ export default function MapCanvas() {
         }
     }
 
+    function signInHandler(){
+        const signInWithGoogle = () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider);
+        }
+        return(
+            <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+        )
+    }
+
+    function overallHandler(){
+        if (user === null){
+            return (signInHandler())
+        }
+        else if (user !== null){
+            return (overlayHandler())
+        }
+    }
+    
+
 //offset should be half the height and width of the size of the overlay element (both positive)
     return (
         <div>
-            
-            {overlayHandler()}
+            {overallHandler()}
         </div>
     );
 }
