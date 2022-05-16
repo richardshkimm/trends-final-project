@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import Smell from '../components/smell';
 import styles from '../styles/bigmap.module.css'
 import Button from '@mui/material/Button';
-import { collection, getDocs, updateDoc ,addDoc, doc, query } from "@firebase/firestore";
+import { collection, getDocs, updateDoc ,addDoc, doc, deleteDoc, query } from "@firebase/firestore";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -56,31 +56,38 @@ export default function MapCanvas() {
         let markerDescription = ""
         let markerRating = 2.5;
         let markerAllergy = false;
-
-        for (const smell of dbSmellData) {
-            if (smell.location[0].lat === viewedMarker[0] && smell.location[1].lng === viewedMarker[1]) {
-                markerTitle= smell.title.smellTitle
-                markerDescription = smell.desc.description
-                markerRating = smell.rating.value
-                markerAllergy = smell.allergy.allergy
+        //console.log(dbSmellData[0])
+        if (viewedMarker === [0,0]){
+            return;}
+        else if (viewedMarker !== [0]) {
+            for (const smell of dbSmellData) {
+                if (smell.location[0].lat === viewedMarker[0] && smell.location[1].lng === viewedMarker[1]) {
+                    markerTitle= smell.title.smellTitle
+                    markerDescription = smell.desc.description
+                    markerRating = smell.rating.value
+                    markerAllergy = smell.allergy.allergy
+                }
             }
+    
+            return (
+                <Overlay anchor={[viewedMarker[0],viewedMarker[1]]} offset={[75, 100]}>
+                <Box
+                    sx={{
+                    width: 150,
+                    height: 200,
+                    backgroundColor: 'gray',
+                    borderRadius: '30%',
+                    }}>
+                    <div className={styles.overlayBox}>
+                            <div className={styles.overlayCancelIcon}>
+                                <CancelIcon style={{color: "red"}} onClick={()=> setViewedMarker([0,0])}/>
+                            </div>
+                        <h6>You clicked smell at {viewedMarker} title: {markerTitle} description: {markerDescription} rating : {markerRating} allergy : {markerAllergy}</h6>
+                    </div>      
+                </Box>
+            </Overlay>
+            )
         }
-
-        return (
-            <Overlay anchor={[viewedMarker[0],viewedMarker[1]]} offset={[75, 100]}>
-            <Box
-                sx={{
-                width: 150,
-                height: 200,
-                backgroundColor: 'gray',
-                borderRadius: '30%',
-                }}>
-                <div className={styles.overlayBox}>
-                    <h6>You clicked smell at {viewedMarker} title: {markerTitle} description: {markerDescription} rating : {markerRating} allergy : {markerAllergy}</h6>
-                </div>      
-            </Box>
-        </Overlay>
-        )
     }
 
     function displayAllMarkers(){
@@ -115,11 +122,34 @@ export default function MapCanvas() {
       }, [])
       
 
+      
     useEffect(() => { // updates location every ~5 seconds -- check with console.log(userLat, userLong, Date.now());
         const updateLocation = (setInterval(() => {
             getLocation();
             }, 5000));
             return () => clearInterval(updateLocation);}, [])
+
+/*
+    function deleteStale(){
+        for (const smell of dbSmellData) {
+            const smellCollectionRef = collection(db, 'smells');
+            if (smell.time_upload < Date.now() - (1000 * 60 * 60)) {
+                deleteDoc(doc(db, {smellCollectionRef}, {smell.location}));
+            };
+                }
+            }
+        
+    useEffect(() => {
+        // This will fire only on mount. 
+        deleteStale();
+        }, [])
+
+    useEffect(() => { // deletes stale smells every ~60 seconds 
+        const deleteStaleSmells = (setInterval(() => {
+            deleteStale();
+            }, 60000));
+            return () => clearInterval(deleteStaleSmells);}, [])
+*/
 
     function mobileOverlayDisplay(overlayLatLng: [number, number]) {
         if (locationStat !== "" && overlayLatLng[0] !== 0 && overlayLatLng[1] !== 0){
